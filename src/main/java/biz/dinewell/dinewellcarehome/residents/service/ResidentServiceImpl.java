@@ -1,9 +1,13 @@
 package biz.dinewell.dinewellcarehome.residents.service;
 
+import biz.dinewell.dinewellcarehome.db.entity.Resident;
+import biz.dinewell.dinewellcarehome.db.entity.Title;
 import biz.dinewell.dinewellcarehome.db.repositories.ResidentRepository;
 import biz.dinewell.dinewellcarehome.residents.factory.ResidentFactory;
 import biz.dinewell.dinewellcarehome.residents.presentation.ResidentDTO;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -29,5 +33,23 @@ public class ResidentServiceImpl implements ResidentService {
         Set<ResidentDTO> residentDTOS = new HashSet<>();
         residentRepository.findAll().iterator().forEachRemaining(resident -> residentDTOS.add(residentFactory.generateDTO(resident)));
         return residentDTOS;
+    }
+
+    @Override
+    public ResponseEntity createNewResident(ResidentDTO residentDTO) {
+        log.debug("Persisting a new Resident");
+
+        if (residentDTO.getFirstName() == null || residentDTO.getTitle() == null) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+
+        Resident resident = new Resident();
+        resident.setFirstName(residentDTO.getFirstName());
+        resident.setMiddleName(residentDTO.getMiddleName());
+        resident.setLastName(residentDTO.getLastName());
+        resident.setTitle(new Title(residentDTO.getTitle().getCode(), residentDTO.getTitle().getName()));
+
+        residentRepository.save(resident);
+        return ResponseEntity.status((HttpStatus.CREATED)).build();
     }
 }

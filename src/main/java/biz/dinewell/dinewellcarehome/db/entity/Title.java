@@ -1,6 +1,8 @@
 package biz.dinewell.dinewellcarehome.db.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +13,8 @@ import java.io.Serializable;
 @Entity
 @Table(name = "TITLE")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Title implements Serializable {
 
     private static final long serialVersionUID = 0;
