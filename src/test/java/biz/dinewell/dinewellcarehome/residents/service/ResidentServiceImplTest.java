@@ -65,34 +65,42 @@ public class ResidentServiceImplTest {
     @Test
     public void createNewResidentWhenResidentIsValid() throws Exception {
         residentDTO = new ResidentDTO();
-        residentDTO.setFirstName("Bob");
-
+        residentDTO.setFirstName("John");
         titleDTO = new TitleDTO();
         titleDTO.setCode("Mr");
         titleDTO.setName("Mr");
-
         residentDTO.setTitle(titleDTO);
 
-        assertEquals("Bob", residentDTO.getFirstName());
+        assertEquals("John", residentDTO.getFirstName());
         assertEquals("Mr", residentDTO.getTitle().getCode());
         assertEquals(ResponseEntity.status(HttpStatus.CREATED).build(), residentService.createNewResident(residentDTO));
+        resident = new Resident(null, "John", null, null, new Title("Mr", "Mr"));
+        verify(residentRepository, times(1)).save(resident);
     }
 
     @Test
-    public void createNewResidentWhenFirstNameIsNull() throws  Exception {
-        resident.setTitle(title);
+    public void createNewResidentWhenFirstNameIsEmpty() throws  Exception {
         residentDTO.setTitle(titleDTO);
-        assertEquals(residentService.createNewResident(residentDTO), ResponseEntity.status(HttpStatus.NO_CONTENT).build());
+        residentDTO.setFirstName("");
+        assertEquals(ResponseEntity.status(HttpStatus.NO_CONTENT).build(), residentService.createNewResident(residentDTO));
+        resident = new Resident(null, "", null, "Smith", new Title("Mr", "Mr"));
 
         verify(residentRepository, times(0)).save(resident);
     }
 
     @Test
-    public void createNewResidentWhenTitleIsNull() throws  Exception {
-        residentDTO.setFirstName("Bob");
-        resident.setFirstName("Bob");
-        assertEquals(residentService.createNewResident(residentDTO), ResponseEntity.status(HttpStatus.NO_CONTENT).build());
+    public void createNewResidentWhenFirstNameIsNull() throws  Exception {
+        residentDTO.setTitle(titleDTO);
+        assertEquals(ResponseEntity.status(HttpStatus.NO_CONTENT).build(), residentService.createNewResident(residentDTO));
+        resident = new Resident(null, null, null, "Smith", new Title("Mr", "Mr"));
+        verify(residentRepository, times(0)).save(resident);
+    }
 
+    @Test
+    public void createNewResidentWhenTitleIsNull() throws  Exception {
+        residentDTO.setFirstName("John");
+        assertEquals(ResponseEntity.status(HttpStatus.NO_CONTENT).build(), residentService.createNewResident(residentDTO));
+        resident = new Resident(null, "John", "Jack", "Smith", null);
         verify(residentRepository, times(0)).save(resident);
     }
 

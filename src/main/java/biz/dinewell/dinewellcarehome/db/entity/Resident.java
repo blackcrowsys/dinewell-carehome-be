@@ -17,10 +17,6 @@ public class Resident extends AbstractUUIDEntity {
     @Column(name = "ID")
     private String id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "TITLE")
-    private Title title;
-
     @Column(name = "FIRSTNAME")
     private String firstName;
 
@@ -29,6 +25,10 @@ public class Resident extends AbstractUUIDEntity {
 
     @Column(name = "SURNAME")
     private String lastName;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "TITLE")
+    private Title title;
 
     public void setTitle(String code, String name) {
         this.title.setCode(code);

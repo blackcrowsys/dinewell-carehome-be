@@ -39,7 +39,7 @@ public class ResidentServiceImpl implements ResidentService {
     public ResponseEntity createNewResident(ResidentDTO residentDTO) {
         log.debug("Persisting a new Resident");
 
-        if (residentDTO.getFirstName() == null || residentDTO.getTitle() == null) {
+        if (residentDTO.getFirstName() == null || residentDTO.getFirstName().isEmpty() || residentDTO.getTitle() == null) {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         }
 
