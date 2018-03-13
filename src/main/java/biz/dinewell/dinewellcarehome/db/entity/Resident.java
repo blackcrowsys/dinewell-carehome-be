@@ -6,11 +6,11 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "RESIDENT")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "RESIDENT")
 public class Resident extends AbstractUUIDEntity {
     private static final long serialVersionUID = 0;
 
