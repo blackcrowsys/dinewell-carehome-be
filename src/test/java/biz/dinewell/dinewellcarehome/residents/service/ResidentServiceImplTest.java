@@ -3,7 +3,7 @@ package biz.dinewell.dinewellcarehome.residents.service;
 import biz.dinewell.dinewellcarehome.db.entity.Resident;
 import biz.dinewell.dinewellcarehome.db.entity.Title;
 import biz.dinewell.dinewellcarehome.db.repositories.ResidentRepository;
-import biz.dinewell.dinewellcarehome.residents.factory.ResidentFactory;
+import biz.dinewell.dinewellcarehome.residents.factory.ResidentDTOFactory;
 import biz.dinewell.dinewellcarehome.residents.presentation.ResidentDTO;
 import biz.dinewell.dinewellcarehome.residents.presentation.TitleDTO;
 import org.junit.Before;
@@ -29,7 +29,7 @@ public class ResidentServiceImplTest {
     private ResidentRepository residentRepository;
 
     @Mock
-    private ResidentFactory residentFactory;
+    private ResidentDTOFactory residentDTOFactory;
 
     @Mock
     private Resident resident;
@@ -47,13 +47,13 @@ public class ResidentServiceImplTest {
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        residentService = new ResidentServiceImpl(residentRepository, residentFactory);
+        residentService = new ResidentServiceImpl(residentRepository, residentDTOFactory);
     }
 
     @Test
     public void getAllResidents() throws Exception {
         Set<ResidentDTO> residentData = new HashSet<>();
-        residentData.add(residentFactory.generateDTO(resident));
+        residentData.add(residentDTOFactory.generateDTO(resident));
         when(residentService.getAllResidents()).thenReturn(residentData);
         Set<ResidentDTO> residents = residentService.getAllResidents();
 

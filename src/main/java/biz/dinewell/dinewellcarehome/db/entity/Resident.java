@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -29,6 +31,10 @@ public class Resident extends AbstractUUIDEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "TITLE")
     private Title title;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "RESIDENTALLERGEN", joinColumns = @JoinColumn(name = "RESIDENTID"), inverseJoinColumns = @JoinColumn(name = "ALLERGENCODE"))
+    private Set<Allergen> allergens = new HashSet<>();
 
     public void setTitle(String code, String name) {
         this.title.setCode(code);

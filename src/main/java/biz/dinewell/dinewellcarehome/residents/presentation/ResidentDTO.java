@@ -1,9 +1,10 @@
 package biz.dinewell.dinewellcarehome.residents.presentation;
 
-import biz.dinewell.dinewellcarehome.db.entity.Title;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,4 +22,6 @@ public class ResidentDTO {
     private String url;
 
     private TitleDTO title;
+
+    private List<ResidentAllergenDTO> residentAllergenDTOList;
 }
