@@ -2,12 +2,14 @@ package biz.dinewell.dinewellcarehome.db.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,9 +17,6 @@ import java.util.Set;
 @Table(name = "RESIDENT")
 public class Resident extends AbstractUUIDEntity {
     private static final long serialVersionUID = 0;
-
-    @Column(name = "ID")
-    private String id;
 
     @Column(name = "FIRSTNAME")
     private String firstName;

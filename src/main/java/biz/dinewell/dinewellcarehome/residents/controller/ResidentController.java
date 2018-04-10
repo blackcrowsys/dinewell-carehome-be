@@ -2,7 +2,6 @@ package biz.dinewell.dinewellcarehome.residents.controller;
 
 import biz.dinewell.dinewellcarehome.common.WebAPI;
 import biz.dinewell.dinewellcarehome.residents.presentation.ResidentDTO;
-import biz.dinewell.dinewellcarehome.residents.presentation.ResidentListDTO;
 import biz.dinewell.dinewellcarehome.residents.service.ResidentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

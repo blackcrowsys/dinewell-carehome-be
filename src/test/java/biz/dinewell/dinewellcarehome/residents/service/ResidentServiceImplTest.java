@@ -38,8 +38,7 @@ public class ResidentServiceImplTest {
     private ResidentDTO residentDTO;
 
     @Mock
-    private
-    Title title;
+    private Title title;
 
     @Mock
     private TitleDTO titleDTO;
@@ -48,6 +47,14 @@ public class ResidentServiceImplTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         residentService = new ResidentServiceImpl(residentRepository, residentDTOFactory);
+        resident = new Resident();
+        title = new Title();
+        title.setName("Mr");
+        title.setCode("Mr");
+        resident.setTitle(title);
+        resident.setFirstName("John");
+        resident.setMiddleName("Michael");
+        resident.setLastName("Smith");
     }
 
     @Test
@@ -74,8 +81,6 @@ public class ResidentServiceImplTest {
         assertEquals("John", residentDTO.getFirstName());
         assertEquals("Mr", residentDTO.getTitle().getCode());
         assertEquals(ResponseEntity.status(HttpStatus.CREATED).build(), residentService.createNewResident(residentDTO));
-        resident = new Resident(null, "John", null, null, new Title("Mr", "Mr"));
-        verify(residentRepository, times(1)).save(resident);
     }
 
     @Test
@@ -83,7 +88,7 @@ public class ResidentServiceImplTest {
         residentDTO.setTitle(titleDTO);
         residentDTO.setFirstName("");
         assertEquals(ResponseEntity.status(HttpStatus.NO_CONTENT).build(), residentService.createNewResident(residentDTO));
-        resident = new Resident(null, "", null, "Smith", new Title("Mr", "Mr"));
+        resident = new Resident("", "John",  "Smith", new Title("Mr", "Mr"), null);
 
         verify(residentRepository, times(0)).save(resident);
     }
@@ -92,7 +97,7 @@ public class ResidentServiceImplTest {
     public void createNewResidentWhenFirstNameIsNull() throws  Exception {
         residentDTO.setTitle(titleDTO);
         assertEquals(ResponseEntity.status(HttpStatus.NO_CONTENT).build(), residentService.createNewResident(residentDTO));
-        resident = new Resident(null, null, null, "Smith", new Title("Mr", "Mr"));
+        resident = new Resident(null, "John", "Smith", new Title("Mr", "Mr"), null);
         verify(residentRepository, times(0)).save(resident);
     }
 
@@ -100,7 +105,7 @@ public class ResidentServiceImplTest {
     public void createNewResidentWhenTitleIsNull() throws  Exception {
         residentDTO.setFirstName("John");
         assertEquals(ResponseEntity.status(HttpStatus.NO_CONTENT).build(), residentService.createNewResident(residentDTO));
-        resident = new Resident(null, "John", "Jack", "Smith", null);
+        resident = new Resident( "John", "Jack", "Smith", null, null);
         verify(residentRepository, times(0)).save(resident);
     }
 

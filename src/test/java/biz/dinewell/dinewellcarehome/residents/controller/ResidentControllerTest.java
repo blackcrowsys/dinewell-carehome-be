@@ -56,7 +56,7 @@ public class ResidentControllerTest {
     public void setUp() {
         JacksonTester.initFields(this, objectMapper);
         titleDTO = new TitleDTO("Mr", "Mr");
-        residentDTO = new ResidentDTO("3ba114a6-b88e-4a16-9b39-e7e691e290f0", "Name", "", "Surname", "/resident", titleDTO);
+        residentDTO = new ResidentDTO("3ba114a6-b88e-4a16-9b39-e7e691e290f0", "Name", "", "Surname", "/resident", titleDTO, null);
     }
 
     @Test

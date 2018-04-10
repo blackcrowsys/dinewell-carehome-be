@@ -3,12 +3,15 @@ package biz.dinewell.dinewellcarehome.db.entity;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.*;
+
 import static org.junit.Assert.*;
 
 public class ResidentTest {
 
     Resident resident;
     Title title;
+    Allergen allergen;
 
     @Before
     public void setUp() throws Exception {
@@ -43,6 +46,14 @@ public class ResidentTest {
         String lastName = "Smith";
         resident.setLastName(lastName);
         assertEquals(lastName, resident.getLastName());
+    }
+
+    @Test
+    public void getResidentsAllergens() throws Exception {
+        allergen = new Allergen("MLK", "Milk", null);
+        Set<Allergen> allergenSet = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(allergen)));
+        resident.setAllergens(allergenSet);
+        assertEquals(allergen, resident.getAllergens());
     }
 
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResidentDTOFactory {
 
-    public static ResidentDTO generateDTO(Resident resident) {
+    public ResidentDTO generateDTO(Resident resident) {
         ResidentDTO dto = new ResidentDTO();
         dto.setId(resident.getId());
         dto.setFirstName(resident.getFirstName());
@@ -17,7 +17,7 @@ public class ResidentDTOFactory {
         dto.setLastName(resident.getLastName());
         dto.setTitle(new TitleDTO(resident.getTitle().getCode(),resident.getTitle().getName()));
         dto.setUrl(String.format("%s/%s", WebAPI.RESIDENT_API, resident.getId()));
-        dto.setResidentAllergenDTOList((resident.getAllergens()));
+
         return dto;
     }
 }
