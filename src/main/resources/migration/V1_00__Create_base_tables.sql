@@ -32,4 +32,36 @@ INSERT INTO TITLE VALUES
   ('Ms', 'Ms');
 
 INSERT INTO RESIDENT VALUES
-  ('5893cb52-1a31-402b-9331-d008ae563ab1', 'Mr', 'Ramon', 'Singh', 'Skywalker');
+  ('5893cb52-1a31-402b-9331-d008ae563ab1', 'Mr', 'John', 'James', 'Smith');
+
+CREATE TABLE ALLERGEN(
+    CODE            		CHAR(3) NOT NULL UNIQUE,
+    NAME                VARCHAR(100),
+    PRIMARY KEY(CODE)
+);
+
+INSERT INTO ALLERGEN VALUES
+('CLY','Celery'),
+('CRL','Cereals containing gluten'),
+('CTC','Crustaceans'),
+('EGG','Eggs'),
+('FSH','Fish'),
+('LPN','Lupins'),
+('MLK','Milk'),
+('MLS','Molluscs'),
+('MST','Mustard'),
+('NUT','Nuts - different from peanuts'),
+('PNT', 'Peanuts - different from nuts'),
+('SSM','Sesame seeds'),
+('SYA','Soya'),
+('SO2','Suphur dioxide/suphites');
+
+CREATE TABLE RESIDENTALLERGEN(
+    ID                  VARCHAR(250) NOT NULL,
+    RESIDENTID          VARCHAR(250) NOT NULL,
+    ALLERGENCODE        CHAR(3) NOT NULL,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (RESIDENTID) REFERENCES RESIDENT(ID),
+    FOREIGN KEY (ALLERGENCODE) REFERENCES ALLERGEN(CODE),
+    UNIQUE (RESIDENTID, ALLERGENCODE)
+);
