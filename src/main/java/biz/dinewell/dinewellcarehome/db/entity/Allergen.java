@@ -2,7 +2,6 @@ package biz.dinewell.dinewellcarehome.db.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
@@ -11,15 +10,14 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.util.Set;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "ALLERGEN")
-public class Allergen extends AbstractUUIDEntity {
-    private static final long serialVersionUID = 0;
+public class Allergen{
 
+    @javax.persistence.Id
     @Column(name = "CODE")
     private String code;
 

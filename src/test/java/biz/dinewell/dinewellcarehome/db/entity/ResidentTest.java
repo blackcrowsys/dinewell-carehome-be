@@ -53,7 +53,7 @@ public class ResidentTest {
         allergen = new Allergen("MLK", "Milk", null);
         Set<Allergen> allergenSet = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(allergen)));
         resident.setAllergens(allergenSet);
-        assertEquals(allergen, resident.getAllergens());
+        assertEquals(true, resident.getAllergens().contains(allergen));
     }
 
 }
